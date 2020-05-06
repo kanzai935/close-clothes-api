@@ -1,0 +1,14 @@
+mongo admin -u mongodb_root_user -p
+use close-clothes
+db.createUser(
+    {
+        user:"close-clothes_user",
+        pwd:"close-clothes_password",
+        roles:[
+            {
+                "role":"dbOwner",
+                "db":"close-clothes"
+            }
+        ]
+    }
+);

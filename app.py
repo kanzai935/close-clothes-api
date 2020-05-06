@@ -15,8 +15,9 @@ class User(object):
         mongodb_username = os.environ['MONGODB_USERNAME']
         mongodb_password = os.environ['MONGODB_PASSWORD']
         mongodb_host = os.environ['MONGODB_HOSTNAME']
+        mongodb_database = os.environ['MONGODB_DATABASE']
         self.client = MongoClient(mongodb_host, 27017)
-        self.db = self.client['close-clothes']
+        self.db = self.client[mongodb_database]
         self.db.authenticate(mongodb_username,mongodb_password)
 
     def add_one(self):
