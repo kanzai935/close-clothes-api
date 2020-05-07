@@ -3,12 +3,11 @@ services:
   web:
     build: .
     ports:
-     - 5000:5000
+      - 5000:5000
     volumes:
-     - .:/code
+      - .:/code
     environment:
       APP_ENV: local
-      APP_DEBUG: "True"
       MONGODB_USERNAME: close-clothes_user
       MONGODB_PASSWORD: close-clothes_password
       MONGODB_DATABASE: close-clothes

@@ -1,11 +1,10 @@
-from flask import Flask
-from redis import Redis
-from pymongo import MongoClient
-from datetime import datetime
-import uuid
 import os
+import uuid
+from datetime import datetime
 
-app = Flask(__name__)
+from pymongo import MongoClient
+from redis import Redis
+
 redis = Redis(host='redis', port=6379)
 
 
@@ -18,7 +17,7 @@ class User(object):
         mongodb_database = os.environ['MONGODB_DATABASE']
         self.client = MongoClient(mongodb_host, 27017)
         self.db = self.client[mongodb_database]
-        self.db.authenticate(mongodb_username,mongodb_password)
+        self.db.authenticate(mongodb_username, mongodb_password)
 
     def add_one(self):
         post = {
@@ -28,13 +27,8 @@ class User(object):
         return self.db.users.insert_one(post)
 
 
-@app.route('/')
-def hello():
+def index():
     redis.incr('hits')
     user = User()
     rest = user.add_one()
     return 'Hello World! I have been seen %s times.' % redis.get('hits')
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
