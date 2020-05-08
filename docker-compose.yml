@@ -8,10 +8,11 @@ services:
       - .:/code
     environment:
       APP_ENV: local
+      DOMAIN_NAME: 127.0.0.1
       MONGODB_USERNAME: close-clothes_user
       MONGODB_PASSWORD: close-clothes_password
-      MONGODB_DATABASE: close-clothes
-      MONGODB_HOSTNAME: mongodb
+      MONGODB_DATABASE_NAME: close-clothes
+      MONGODB_HOST: mongodb
   redis:
     image: redis
   mongodb:
