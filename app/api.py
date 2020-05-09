@@ -45,5 +45,5 @@ def add_user():
 
 def fetch_user(user_id):
     user = User()
-    result_user_id = user.fetch_one(user_id)
-    return result_user_id
+    mongodb_user_id = user.fetch_one(user_id)
+    return mongodb_user_id
