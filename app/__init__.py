@@ -15,12 +15,12 @@ def create_app(env):
     def add_user():
         user_id = api.add_user()
         session['user_id'] = user_id
-        return render_template('user.html', user_id=user_id)
+        return render_template('user/welcome.html', user_id=user_id)
 
     @app.route('/user', methods=['GET'])
     def fetch_user():
         user_id = session.get('user_id')
         mongodb_user_id = api.fetch_user(user_id)
-        return 'Hello! your user_id is %s .' % mongodb_user_id
+        return render_template('user/mypage.html', mongodb_user_id=mongodb_user_id)
 
     return app
