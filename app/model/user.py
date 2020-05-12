@@ -1,10 +1,10 @@
 import uuid
 from datetime import datetime
 
-from app.model.model import Model
+from app.model.person import Person
 
 
-class User(Model):
+class User(Person):
 
     def __init__(self):
         super(User, self).__init__()
@@ -19,5 +19,6 @@ class User(Model):
         return user_id
 
     def fetch_one(self, user_id):
-        user = super(User, self).fetch_one('user_id', user_id)
+        mongodb_filter = {'key': 'user_id', 'value': user_id}
+        user = super(User, self).fetch_one(mongodb_filter)
         return user['user_id']
