@@ -16,15 +16,14 @@ class Person(object):
         self.mongodb_db = MongoClient(mongodb_host, 27017)[mongodb_database_name]
         self.mongodb_db.authenticate(mongodb_username, mongodb_password)
 
-    @staticmethod
-    def __get_collection_name_from_child_class_name(child_class_name):
-        return child_class_name.lower() + 's'
+    def __get_collection_name_from_child_class_name(self):
+        return '%ss' % self.__class__.__name__.lower()
 
     def add_one(self, post=None):
-        collection_name = self.__get_collection_name_from_child_class_name(self.__class__.__name__)
+        collection_name = self.__get_collection_name_from_child_class_name()
         self.mongodb_db[collection_name].insert_one(post)
 
     def fetch_one(self, mongodb_filter=None):
-        collection_name = self.__get_collection_name_from_child_class_name(self.__class__.__name__)
+        collection_name = self.__get_collection_name_from_child_class_name()
         mongodb_entity = self.mongodb_db[collection_name].find_one({mongodb_filter['key']: mongodb_filter['value']})
         return mongodb_entity
