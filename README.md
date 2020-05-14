@@ -3,7 +3,7 @@
 - [ ] Pipenv、Poetry、Pyflow、Pyenv、Venv、Virtualenv比較
 - [ ] yeild導入
 - [ ] RoleのClass化
-- [ ] rolesコレクションのレコードの一意化
+- [x] rolesコレクションのレコードの一意化
 - [ ] admin作成
 - [ ] OAuth認証導入（Google）
 - [ ] ローカルOAuthサーバー構築

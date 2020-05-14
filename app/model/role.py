@@ -16,17 +16,17 @@ class Role(object):
         self.mongodb_db.authenticate(mongodb_username, mongodb_password)
 
     def add_one(self):
-        post = {
-            'role_name': self.role_name,
-            'role_policies': self.role_policies
-        }
-        self.mongodb_db.roles.insert_one(post)
+        role_name_filter = {'role_name': self.role_name}
+        role_policies = {'role_policies': self.role_policies}
+        post = dict(**role_name_filter, **role_policies)
+        self.mongodb_db.roles.update_one(role_name_filter, {'$set': post},
+                                         upsert=True)
 
-    def assign(self):
-        pass
+        def assign(self):
+            pass
 
-    def authorize(self):
-        pass
+        def authorize(self):
+            pass
 
-    def authenticate(self):
-        pass
+        def authenticate(self):
+            pass
