@@ -1,0 +1,14 @@
+## ToDo
+- [ ] パッケージ管理導入
+- [ ] Pipenv、Poetry、Pyflow、Pyenv、Venv、Virtualenv比較
+- [ ] yeild導入
+- [ ] RoleのClass化
+- [ ] rolesコレクションのレコードの一意化
+- [ ] admin作成
+- [ ] OAuth認証導入（Google）
+- [ ] ローカルOAuthサーバー構築
+- [ ] 分析結果：洋服形状
+- [ ] 分析結果：色
+- [ ] Test導入
+- [ ] Swagger導入
+- [ ] API化
