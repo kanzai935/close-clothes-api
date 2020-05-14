@@ -22,11 +22,11 @@ class Role(object):
         self.mongodb_db.roles.update_one(role_name_filter, {'$set': post},
                                          upsert=True)
 
-        def assign(self):
-            pass
+    def assign(self):
+        pass
 
-        def authorize(self):
-            pass
+    def authorize(self):
+        pass
 
-        def authenticate(self):
-            pass
+    def authenticate(self):
+        pass
