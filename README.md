@@ -7,6 +7,7 @@
 - [ ] mongoClientClass作成
 - [ ] RoleのClass化
 - [x] rolesコレクションのレコードの一意化
+- [ ] ユーザー名入力フォーム追加
 - [ ] admin作成
 - [ ] OAuth認証導入（Google）
 - [ ] ローカルOAuthサーバー構築
