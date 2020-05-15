@@ -11,11 +11,11 @@ class User(Person):
 
     def add_one(self):
         user_id = str(uuid.uuid4())
-        post = {
+        mongodb_post = {
             'user_id': user_id,
             'created_at': datetime.now()
         }
-        super(User, self).add_one(post)
+        super(User, self).add_one(mongodb_post)
         return user_id
 
     def fetch_one(self, user_id):

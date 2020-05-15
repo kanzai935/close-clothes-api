@@ -1,7 +1,10 @@
 ## ToDo
 - [ ] パッケージ管理導入
 - [ ] Pipenv、Poetry、Pyflow、Pyenv、Venv、Virtualenv比較
-- [ ] yeild導入
+- [ ] configファイル化
+- [ ] 環境変数化
+- [ ] yield導入
+- [ ] mongoClientClass作成
 - [ ] RoleのClass化
 - [x] rolesコレクションのレコードの一意化
 - [ ] admin作成

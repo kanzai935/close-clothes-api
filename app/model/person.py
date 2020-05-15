@@ -1,5 +1,5 @@
 import os
-
+from app.model.role import Role
 from pymongo import MongoClient
 
 mongodb_username = os.environ['MONGODB_USERNAME']
@@ -10,17 +10,18 @@ mongodb_database_name = os.environ['MONGODB_DATABASE_NAME']
 
 class Person(object):
 
-    def __init__(self, name=None):
+    def __init__(self, name=None, role_name='default'):
         self.name = name
+        self.role_name = role_name
         self.mongodb_db = MongoClient(mongodb_host, 27017)[mongodb_database_name]
         self.mongodb_db.authenticate(mongodb_username, mongodb_password)
 
     def __get_collection_name_from_child_class_name(self):
         return '%ss' % self.__class__.__name__.lower()
 
-    def add_one(self, post=None):
+    def add_one(self, mongodb_post=None):
         collection_name = self.__get_collection_name_from_child_class_name()
-        self.mongodb_db[collection_name].insert_one(post)
+        self.mongodb_db[collection_name].insert_one(mongodb_post)
 
     def fetch_one(self, mongodb_filter=None):
         collection_name = self.__get_collection_name_from_child_class_name()
