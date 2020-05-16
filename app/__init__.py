@@ -9,11 +9,14 @@ def create_app(env):
     @app.route('/')
     def index():
         counter = api.index()
-        return render_template('index.html', counter=counter)
+        roles = api.fetch_roles()
+        return render_template('index.html', counter=counter, roles=roles)
 
     @app.route('/user', methods=['POST'])
     def add_user():
-        user_id = api.add_user()
+        user_name = request.form['user_name']
+        role_name = request.form['role_name']
+        user_id = api.add_user(user_name, role_name)
         session['user_id'] = user_id
         return render_template('user/welcome.html', user_id=user_id)
 

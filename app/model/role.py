@@ -30,3 +30,14 @@ class Role(object):
 
     def authenticate(self):
         pass
+
+    @staticmethod
+    def fetch_roles():
+        mongodb_db = MongoClient(mongodb_host, 27017)[mongodb_database_name]
+        mongodb_db.authenticate(mongodb_username, mongodb_password)
+        mongodb_roles = mongodb_db.roles.find()
+        roles = []
+        for mongodb_role in mongodb_roles:
+            role = Role(mongodb_role['role_name'], mongodb_role['role_policies'])
+            roles.append(role)
+        return roles

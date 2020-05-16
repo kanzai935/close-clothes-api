@@ -11,8 +11,8 @@ def index():
     return 'Hello World! I have been seen %s times.' % redis.get('hits')
 
 
-def add_user():
-    user = User()
+def add_user(user_name, role_name):
+    user = User(user_name, role_name)
     user_id = user.add_one()
     return user_id
 
@@ -26,3 +26,8 @@ def fetch_user(user_id):
 def add_role(role_name, role_policies):
     role = Role(role_name, role_policies)
     role.add_one()
+
+
+def fetch_roles():
+    roles = Role.fetch_roles()
+    return roles

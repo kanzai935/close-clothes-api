@@ -5,10 +5,13 @@
 - [ ] 環境変数化
 - [ ] yield導入
 - [ ] mongoClientClass作成
-- [ ] RoleのClass化
+- [x] RoleのClass化
 - [x] rolesコレクションのレコードの一意化
-- [ ] ユーザー名入力フォーム追加
+- [x] ユーザー名入力フォーム追加
+- [ ] ユーザーにRoleを割り当て
+- [ ] fetch_xxの抽象化
 - [ ] admin作成
+- [ ] パスワード認証
 - [ ] OAuth認証導入（Google）
 - [ ] ローカルOAuthサーバー構築
 - [ ] 分析結果：洋服形状
