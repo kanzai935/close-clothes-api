@@ -10,10 +10,34 @@ mongodb_database_name = os.environ['MONGODB_DATABASE_NAME']
 
 class Role(object):
     def __init__(self, role_name=None, role_policies=None):
-        self.role_name = role_name
-        self.role_policies = role_policies
+        self.__role_name = role_name
+        self.__role_policies = role_policies
         self.mongodb_db = MongoClient(mongodb_host, 27017)[mongodb_database_name]
         self.mongodb_db.authenticate(mongodb_username, mongodb_password)
+
+    @property
+    def role_name(self):
+        return self.__role_name
+
+    @property
+    def role_policies(self):
+        return self.__role_policies
+
+    @role_name.setter
+    def role_name(self, value):
+        self.__role_name = value
+
+    @role_policies.setter
+    def role_policies(self, value):
+        self.__role_policies = value
+
+    @role_name.deleter
+    def role_name(self):
+        del self.__role_name
+
+    @role_policies.deleter
+    def role_policies(self):
+        del self.__role_policies
 
     def add_one(self):
         role_name_filter = {'role_name': self.role_name}
@@ -31,11 +55,10 @@ class Role(object):
     def authenticate(self):
         pass
 
-    @staticmethod
-    def fetch_roles():
-        mongodb_db = MongoClient(mongodb_host, 27017)[mongodb_database_name]
-        mongodb_db.authenticate(mongodb_username, mongodb_password)
-        mongodb_roles = mongodb_db.roles.find()
+    def fetch_roles(self):
+        self.mongodb_db = MongoClient(mongodb_host, 27017)[mongodb_database_name]
+        self.mongodb_db.authenticate(mongodb_username, mongodb_password)
+        mongodb_roles = self.mongodb_db.roles.find()
         roles = []
         for mongodb_role in mongodb_roles:
             role = Role(mongodb_role['role_name'], mongodb_role['role_policies'])

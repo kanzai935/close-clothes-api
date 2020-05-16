@@ -14,13 +14,17 @@ def index():
 def add_user(user_name, role_name):
     user = User(user_name, role_name)
     user_id = user.add_one()
-    return user_id
+    user.user_id = user_id
+    return user
 
 
 def fetch_user(user_id):
     user = User()
-    mongodb_user_id = user.fetch_one(user_id)
-    return mongodb_user_id
+    mongodb_user = user.fetch_one(user_id)
+    user.user_id = mongodb_user['user_id']
+    user.user_name = mongodb_user['user_name']
+    user.role_name = mongodb_user['role_name']
+    return user
 
 
 def add_role(role_name, role_policies):
@@ -29,5 +33,6 @@ def add_role(role_name, role_policies):
 
 
 def fetch_roles():
-    roles = Role.fetch_roles()
+    role = Role()
+    roles = role.fetch_roles()
     return roles

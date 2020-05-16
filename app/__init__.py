@@ -16,15 +16,15 @@ def create_app(env):
     def add_user():
         user_name = request.form['user_name']
         role_name = request.form['role_name']
-        user_id = api.add_user(user_name, role_name)
-        session['user_id'] = user_id
-        return render_template('user/welcome.html', user_id=user_id)
+        user = api.add_user(user_name, role_name)
+        session['user_id'] = user.user_id
+        return render_template('user/welcome.html', user=user)
 
     @app.route('/user', methods=['GET'])
     def fetch_user():
         user_id = session.get('user_id')
-        mongodb_user_id = api.fetch_user(user_id)
-        return render_template('user/mypage.html', mongodb_user_id=mongodb_user_id)
+        user = api.fetch_user(user_id)
+        return render_template('user/mypage.html', user=user)
 
     @app.route('/role', methods=['POST'])
     def add_role():
