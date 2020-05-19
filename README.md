@@ -8,8 +8,10 @@
 - [x] RoleのClass化
 - [x] rolesコレクションのレコードの一意化
 - [x] ユーザー名入力フォーム追加
-- [ ] ユーザーにRoleを割り当て
+- [x] APIごとの認可に割り当て
 - [x] fetch_xxの抽象化
+- [ ] validation導入
+- [ ] anotation導入
 - [ ] admin作成
 - [ ] パスワード認証
 - [ ] OAuth認証導入（Google）

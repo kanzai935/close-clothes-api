@@ -36,3 +36,8 @@ def fetch_roles():
     role = Role()
     roles = role.fetch_roles()
     return roles
+
+
+def validate_request_path(request_path, user_id):
+    role = Role()
+    return role.authorize(request_path, user_id)

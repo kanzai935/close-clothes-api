@@ -49,7 +49,7 @@ class Role(object):
     def assign(self):
         pass
 
-    def authorize(self):
+    def authorize(self, request_path, user_id):
         pass
 
     def authenticate(self):
