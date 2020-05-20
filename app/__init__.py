@@ -6,7 +6,7 @@ from app import api
 def create_app(env):
     app = Flask(__name__)
 
-    @app.route('/', methods=['POST'])
+    @app.route('/', methods=['GET'])
     def index():
         counter = api.index()
         roles = api.fetch_roles()
@@ -29,7 +29,7 @@ def create_app(env):
     @app.route('/role', methods=['POST'])
     def add_role():
         user_id = session.get('user_id')
-        if user_id is None or api.validate_request_path(request.path, user_id):
+        if user_id is None or not api.validate_request_path(request.path, request.method, user_id):
             return redirect("/")
         role_name = request.form['role_name']
         role_policies = request.form.getlist('role_policy')
@@ -39,7 +39,7 @@ def create_app(env):
     @app.route('/role', methods=['GET'])
     def create_role():
         user_id = session.get('user_id')
-        if user_id is None or api.validate_request_path(request.path, user_id):
+        if user_id is None or not api.validate_request_path(request.path, request.method, user_id):
             return redirect("/")
         return render_template('role/index.html')
 

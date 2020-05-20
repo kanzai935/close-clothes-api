@@ -39,9 +39,9 @@ class Role(object):
     def role_policies(self):
         del self.__role_policies
 
-    def add_one(self):
-        role_name_filter = {'role_name': self.role_name}
-        role_policies = {'role_policies': self.role_policies}
+    def add_role(self):
+        role_name_filter = {'role_name': self.__role_name}
+        role_policies = {'role_policies': self.__role_policies}
         post = dict(**role_name_filter, **role_policies)
         self.mongodb_db.roles.update_one(role_name_filter, {'$set': post},
                                          upsert=True)
@@ -49,18 +49,20 @@ class Role(object):
     def assign(self):
         pass
 
-    def authorize(self, request_path, user_id):
-        pass
+    def authorize(self, mongodb_role_policies_on_apis):
+        return set(mongodb_role_policies_on_apis) == set(self.__role_policies)
 
     def authenticate(self):
         pass
 
     def fetch_roles(self):
-        self.mongodb_db = MongoClient(mongodb_host, 27017)[mongodb_database_name]
-        self.mongodb_db.authenticate(mongodb_username, mongodb_password)
         mongodb_roles = self.mongodb_db.roles.find()
         roles = []
         for mongodb_role in mongodb_roles:
             role = Role(mongodb_role['role_name'], mongodb_role['role_policies'])
             roles.append(role)
         return roles
+
+    def fetch_role(self, role_name):
+        mongodb_role = self.mongodb_db.roles.find_one({'role_name': role_name})
+        return mongodb_role

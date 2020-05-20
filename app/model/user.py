@@ -48,18 +48,18 @@ class User(Person):
     def role_name(self):
         del self.__role_name
 
-    def add_one(self):
+    def add_user(self):
         user_id = str(uuid.uuid4())
         mongodb_post = {
             'user_id': user_id,
-            'user_name': self.user_name,
-            'role_name': self.role_name,
+            'user_name': self.__user_name,
+            'role_name': self.__role_name,
             'created_at': datetime.now()
         }
         super(User, self).add_one(mongodb_post)
         return user_id
 
-    def fetch_one(self, user_id):
+    def fetch_user(self, user_id):
         mongodb_filter = {'key': 'user_id', 'value': user_id}
         mongodb_user = super(User, self).fetch_one(mongodb_filter)
         return mongodb_user
