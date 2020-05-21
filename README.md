@@ -4,7 +4,8 @@
 - [ ] configファイル化
 - [ ] 環境変数化
 - [ ] yield導入
-- [ ] mongoClientClass作成
+- [x] mongoClientClass作成
+- [ ] redisClientClass作成
 - [x] RoleのClass化
 - [x] rolesコレクションのレコードの一意化
 - [x] ユーザー名入力フォーム追加

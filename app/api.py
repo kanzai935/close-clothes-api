@@ -1,7 +1,7 @@
-import os
 
-from pymongo import MongoClient
 from redis import Redis
+
+from app.mongo_client import MongoDBClient
 
 from app.model.role import Role
 from app.model.user import User
@@ -10,12 +10,7 @@ redis = Redis(host='redis', port=6379)
 
 
 def __fetch_api(request_path, request_method):
-    mongodb_username = os.environ['MONGODB_USERNAME']
-    mongodb_password = os.environ['MONGODB_PASSWORD']
-    mongodb_host = os.environ['MONGODB_HOST']
-    mongodb_database_name = os.environ['MONGODB_DATABASE_NAME']
-    mongodb_db = MongoClient(mongodb_host, 27017)[mongodb_database_name]
-    mongodb_db.authenticate(mongodb_username, mongodb_password)
+    mongodb_db = MongoDBClient().get_mongodb()
     mongodb_api = mongodb_db.apis.find_one({'$and': [{'api': request_path}, {'method': request_method}]})
     return mongodb_api
 

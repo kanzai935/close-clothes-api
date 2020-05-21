@@ -1,19 +1,11 @@
-import os
-
-from pymongo import MongoClient
-
-mongodb_username = os.environ['MONGODB_USERNAME']
-mongodb_password = os.environ['MONGODB_PASSWORD']
-mongodb_host = os.environ['MONGODB_HOST']
-mongodb_database_name = os.environ['MONGODB_DATABASE_NAME']
+from app.mongo_client import MongoDBClient
 
 
 class Role(object):
     def __init__(self, role_name=None, role_policies=None):
         self.__role_name = role_name
         self.__role_policies = role_policies
-        self.mongodb_db = MongoClient(mongodb_host, 27017)[mongodb_database_name]
-        self.mongodb_db.authenticate(mongodb_username, mongodb_password)
+        self.__mongodb_db = MongoDBClient().get_mongodb()
 
     @property
     def role_name(self):
@@ -43,7 +35,7 @@ class Role(object):
         role_name_filter = {'role_name': self.__role_name}
         role_policies = {'role_policies': self.__role_policies}
         post = dict(**role_name_filter, **role_policies)
-        self.mongodb_db.roles.update_one(role_name_filter, {'$set': post},
+        self.__mongodb_db.roles.update_one(role_name_filter, {'$set': post},
                                          upsert=True)
 
     def assign(self):
@@ -56,7 +48,7 @@ class Role(object):
         pass
 
     def fetch_roles(self):
-        mongodb_roles = self.mongodb_db.roles.find()
+        mongodb_roles = self.__mongodb_db.roles.find()
         roles = []
         for mongodb_role in mongodb_roles:
             role = Role(mongodb_role['role_name'], mongodb_role['role_policies'])
@@ -64,5 +56,5 @@ class Role(object):
         return roles
 
     def fetch_role(self, role_name):
-        mongodb_role = self.mongodb_db.roles.find_one({'role_name': role_name})
+        mongodb_role = self.__mongodb_db.roles.find_one({'role_name': role_name})
         return mongodb_role
