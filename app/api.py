@@ -1,12 +1,7 @@
-
-from redis import Redis
-
-from app.mongo_client import MongoDBClient
-
 from app.model.role import Role
 from app.model.user import User
-
-redis = Redis(host='redis', port=6379)
+from app.mongo_client import MongoDBClient
+from app.redis_client import RedisClient
 
 
 def __fetch_api(request_path, request_method):
@@ -16,6 +11,7 @@ def __fetch_api(request_path, request_method):
 
 
 def index():
+    redis = RedisClient()
     redis.incr('hits')
     return 'Hello World! I have been seen %s times.' % redis.get('hits')
 
