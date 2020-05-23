@@ -1,4 +1,4 @@
-from app.mongo_client import MongoDBClient
+from app.module.mongodb.mongo_client import MongoDBClient
 
 
 class Role(object):

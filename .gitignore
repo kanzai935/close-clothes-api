@@ -2,3 +2,4 @@
 data/*
 app/__pycache__/*
 app/model/__pycache__/*
+app/module/*/__pycache__/*
