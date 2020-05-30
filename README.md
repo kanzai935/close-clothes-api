@@ -2,7 +2,7 @@
 - [ ] パッケージ管理導入
 - [ ] Pipenv、Poetry、Pyflow、Pyenv、Venv、Virtualenv比較
 - [ ] configファイル化
-- [ ] 環境変数化
+- [x] 環境変数化
 - [ ] yield導入
 - [ ] enum導入
 - [x] mongoClientClass作成

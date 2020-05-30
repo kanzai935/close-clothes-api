@@ -8,7 +8,9 @@ services:
       - .:/code
     environment:
       APP_ENV: local
+      APP_KEY: sfjejj!djl04939rj#
       DOMAIN_NAME: 127.0.0.1
+      DEBUG: 'true'
       MONGODB_USERNAME: close-clothes_user
       MONGODB_PASSWORD: close-clothes_password
       MONGODB_DATABASE_NAME: close-clothes
