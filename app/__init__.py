@@ -1,7 +1,7 @@
 from flask import Flask, session, render_template, request, redirect
 
 from app import api
-from app.model.role_policy import RolePolicy
+
 
 def create_app(env):
     app = Flask(__name__)
@@ -41,6 +41,7 @@ def create_app(env):
         user_id = session.get('user_id')
         if user_id is None or not api.validate_request_path(request.path, request.method, user_id):
             return redirect("/")
-        return render_template('role/index.html', role_policy=RolePolicy)
+        role_policies = api.fetch_role_policies()
+        return render_template('role/index.html', role_policies=role_policies)
 
     return app

@@ -1,4 +1,7 @@
+from app.model.enum_role_policy import EnumRolePolicy
+from app.model.enum_role_policy_name import EnumRolePolicyName
 from app.model.role import Role
+from app.model.role_policy import RolePolicy
 from app.model.user import User
 from app.module.mongodb.mongo_client import MongoDBClient
 from app.module.redis.redis_client import RedisClient
@@ -50,3 +53,11 @@ def validate_request_path(request_path, request_method, user_id):
     role.role_policies = mongodb_role['role_policies']
     mongodb_api = __fetch_api(request_path, request_method)
     return role.authorize(mongodb_api['role_policy'])
+
+
+def fetch_role_policies():
+    role_policies = []
+    for num_role_policy, role_policy_name in zip(EnumRolePolicy, EnumRolePolicyName):
+        role_policy = RolePolicy(num_role_policy, role_policy_name)
+        role_policies.append(role_policy)
+    return role_policies

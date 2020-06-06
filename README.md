@@ -1,10 +1,12 @@
 ## ToDo
-- [ ] パッケージ管理導入
 - [ ] Pipenv、Poetry、Pyflow、Pyenv、Venv、Virtualenv比較
-- [ ] configファイル化
+- [ ] パッケージ管理導入
+- [ ] CythonモジュールのDockerfile内でのコンパイル
+- [x] Cython開通
 - [x] 環境変数化
+- [ ] configファイル化
 - [ ] yield導入
-- [ ] enum導入
+- [x] enum導入
 - [x] mongoClientClass作成
 - [x] redisClientClass作成
 - [x] RoleのClass化
@@ -12,9 +14,7 @@
 - [x] ユーザー名入力フォーム追加
 - [x] APIごとの認可に割り当て
 - [x] fetch_xxの抽象化
-- [x] Cython開通
-- [ ] CythonモジュールのDockerfile内でのコンパイル
-- [ ] Roleチェック最適化
+- [x] Roleチェック最適化
 - [ ] validation導入
 - [ ] anotation導入
 - [ ] admin作成

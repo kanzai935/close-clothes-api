@@ -8,10 +8,9 @@
 {% block content %}
     <form action="/role" method="post">
         <input type="text" name="role_name" size="6">
-        <td><input type="checkbox" name="role_policy" value="{{ RolePolicy.OWNER }}">&nbsp;owner&nbsp;</td>
-        <td><input type="checkbox" name="role_policy" value="{{ RolePolicy.ADMIN }}">&nbsp;admin&nbsp;</td>
-        <td><input type="checkbox" name="role_policy" value="{{ RolePolicy.WRITE }}">&nbsp;write&nbsp;</td>
-        <td><input type="checkbox" name="role_policy" value="{{ RolePolicy.OWNER }}">&nbsp;read&nbsp;</td>
+        {% for role_policy in role_policies %}
+            <td><input type="checkbox" name="role_policy" value="{{ role_policy.num_role_policy }}">{{ role_policy.role_policy_name }}</td>
+        {% endfor %}
         <button>create role</button>
     </form>
 {% endblock %}

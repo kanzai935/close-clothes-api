@@ -36,13 +36,14 @@ class Role(object):
         role_policies = {'role_policies': self.__role_policies}
         post = dict(**role_name_filter, **role_policies)
         self.__mongodb_db.roles.update_one(role_name_filter, {'$set': post},
-                                         upsert=True)
+                                           upsert=True)
 
     def assign(self):
         pass
 
     def authorize(self, mongodb_role_policies_on_apis):
-        return set(mongodb_role_policies_on_apis) == set(self.__role_policies)
+        self.__role_policies.sort()
+        return self.__role_policies[0] in mongodb_role_policies_on_apis
 
     def authenticate(self):
         pass
