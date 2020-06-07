@@ -6,4 +6,3 @@ class EnumRolePolicy(IntEnum):
     ADMIN = 2
     WRITE = 3
     READ = 4
-  

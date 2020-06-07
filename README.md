@@ -15,9 +15,9 @@
 - [x] APIごとの認可に割り当て
 - [x] fetch_xxの抽象化
 - [x] Roleチェック最適化
+- [x] admin作成
 - [ ] validation導入
 - [ ] anotation導入
-- [ ] admin作成
 - [ ] パスワード認証
 - [ ] OAuth認証導入（Google）
 - [ ] ローカルOAuthサーバー構築

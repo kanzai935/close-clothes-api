@@ -1,8 +1,8 @@
-from app.model.enum_role_policy import EnumRolePolicy
-from app.model.enum_role_policy_name import EnumRolePolicyName
-from app.model.role import Role
-from app.model.role_policy import RolePolicy
-from app.model.user import User
+from app.model.role.enum_role_policy import EnumRolePolicy
+from app.model.role.enum_role_policy_name import EnumRolePolicyName
+from app.model.role.role import Role
+from app.model.role.role_policy import RolePolicy
+from app.model.user.user import User
 from app.module.mongodb.mongo_client import MongoDBClient
 from app.module.redis.redis_client import RedisClient
 
@@ -46,13 +46,30 @@ def fetch_roles():
     return roles
 
 
-def validate_request_path(request_path, request_method, user_id):
-    user = fetch_user(user_id)
-    role = Role()
-    mongodb_role = role.fetch_role(user.role_name)
-    role.role_policies = mongodb_role['role_policies']
-    mongodb_api = __fetch_api(request_path, request_method)
-    return role.authorize(mongodb_api['role_policy'])
+def validate_request_path(func):
+    def wrapper(*args, **kwargs):
+        request_path = func(args[0])
+        request_method = func(args[1])
+        user_id = func(args[2])
+
+        user = fetch_user(user_id)
+        role = Role()
+        mongodb_role = role.fetch_role(user.role_name)
+        role.role_policies = mongodb_role['role_policies']
+        mongodb_api = __fetch_api(request_path, request_method)
+        return role.authorize(mongodb_api['role_policy'])
+
+    return wrapper
+
+
+def validate_value_is_none(value):
+    def _validate_value_is_none(func):
+        def wrapper(*args, **kwargs):
+            return value is None
+
+        return wrapper
+
+    return _validate_value_is_none
 
 
 def fetch_role_policies():

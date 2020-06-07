@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from app.model.person import Person
+from app.model.person.person import Person
 
 
 class User(Person):
