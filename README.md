@@ -16,13 +16,13 @@
 - [x] fetch_xxの抽象化
 - [x] Roleチェック最適化
 - [x] admin作成
-- [ ] validation導入
+- [ ] ~~validation導入~~
 - [ ] anotation導入
-- [ ] パスワード認証
-- [ ] OAuth認証導入（Google）
-- [ ] ローカルOAuthサーバー構築
-- [ ] 分析結果：洋服形状
-- [ ] 分析結果：色
 - [ ] Test導入
 - [ ] Swagger導入
 - [ ] API化
+- [ ] パスワード認証
+- [ ] ローカルOAuthサーバー構築
+- [ ] OAuth認証導入（Google）
+- [ ] 分析結果：洋服形状
+- [ ] 分析結果：色

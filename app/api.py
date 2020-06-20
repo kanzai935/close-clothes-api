@@ -46,30 +46,17 @@ def fetch_roles():
     return roles
 
 
-def validate_request_path(func):
-    def wrapper(*args, **kwargs):
-        request_path = func(args[0])
-        request_method = func(args[1])
-        user_id = func(args[2])
-
-        user = fetch_user(user_id)
-        role = Role()
-        mongodb_role = role.fetch_role(user.role_name)
-        role.role_policies = mongodb_role['role_policies']
-        mongodb_api = __fetch_api(request_path, request_method)
-        return role.authorize(mongodb_api['role_policy'])
-
-    return wrapper
+def validate_request_path_is_authorized(request_path, request_method, user_id):
+    user = fetch_user(user_id)
+    role = Role()
+    mongodb_role = role.fetch_role(user.role_name)
+    role.role_policies = mongodb_role['role_policies']
+    mongodb_api = __fetch_api(request_path, request_method)
+    return role.authorize(mongodb_api['role_policy'])
 
 
 def validate_value_is_none(value):
-    def _validate_value_is_none(func):
-        def wrapper(*args, **kwargs):
-            return value is None
-
-        return wrapper
-
-    return _validate_value_is_none
+    return value is None
 
 
 def fetch_role_policies():
